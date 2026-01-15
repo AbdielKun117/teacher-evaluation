@@ -1,0 +1,6 @@
+venadosrater/venv/
+venadosrater/.env
+__pycache__/
+*.pyc
+.DS_Store
+.vscode/

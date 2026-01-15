@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-5 text-center">
+    <div class="col-12">
+        <h1 class="fw-bold text-primary mb-3" style="color: #003366 !important;">Directorio Completo</h1>
+        <p class="text-muted lead">Explora las {{ staff|length }} personas registradas en la plataforma</p>
+    </div>
+</div>
+
+<div class="card shadow border-0">
+    <div class="card-header bg-white border-0 pt-4 px-4">
+        <ul class="nav nav-tabs nav-fill card-header-tabs" id="directoryTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active fw-bold" id="teachers-tab" data-bs-toggle="tab"
+                    data-bs-target="#teachers" type="button" role="tab" aria-selected="true">
+                    <i class="fas fa-chalkboard-teacher me-2"></i>Docentes
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="admin-tab" data-bs-toggle="tab" data-bs-target="#admin"
+                    type="button" role="tab" aria-selected="false">
+                    <i class="fas fa-user-tie me-2"></i>Administrativos
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body p-4 bg-light">
+        <div class="tab-content" id="directoryTabsContent">
+
+            <!-- Teachers Tab -->
+            <div class="tab-pane fade show active" id="teachers" role="tabpanel">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    {% for person in staff if person.role == 'docente' %}
+                    <div class="col">
+                        <a href="{{ url_for('main.professor', id=person.id) }}" class="text-decoration-none text-dark">
+                            <div class="card h-100 shadow-sm hover-card border-0">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="avatar-circle me-3 bg-primary bg-opacity-10 text-primary-ith fw-bold d-flex align-items-center justify-content-center flex-shrink-0"
+                                        style="width: 50px; height: 50px; border-radius: 50%;">
+                                        {{ person.name[:2].upper() }}
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold">{{ person.name }}</h6>
+                                        <small class="text-muted">{{ person.department }}</small>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <i class="fas fa-chevron-right text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Admin Tab -->
+            <div class="tab-pane fade" id="admin" role="tabpanel">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    {% for person in staff if person.role in ['administrativo', 'directivo'] %}
+                    <div class="col">
+                        <a href="{{ url_for('main.professor', id=person.id) }}" class="text-decoration-none text-dark">
+                            <div class="card h-100 shadow-sm hover-card border-0">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="avatar-circle me-3 bg-warning bg-opacity-10 text-warning fw-bold d-flex align-items-center justify-content-center flex-shrink-0"
+                                        style="width: 50px; height: 50px; border-radius: 50%;">
+                                        {{ person.name[:2].upper() }}
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold">{{ person.name }}</h6>
+                                        <small class="text-muted">{{ person.role|capitalize }} - {{ person.department
+                                            }}</small>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <i class="fas fa-chevron-right text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

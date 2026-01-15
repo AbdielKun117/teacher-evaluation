@@ -1,0 +1,57 @@
+:root {
+    --primary-color: #003366;
+    --secondary-color: #FF6600;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 0;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vh;
+    /* Large size relative to viewport height */
+    height: 80vh;
+    background-image: url('../images/logo_transparent.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.05;
+    /* Very subtle opacity */
+    z-index: -1;
+    pointer-events: none;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #002244;
+    border-color: #002244;
+}
+
+/* Utilities */
+.text-primary-ith {
+    color: var(--primary-color) !important;
+}

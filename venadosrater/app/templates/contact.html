@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-body p-5">
+                <h1 class="fw-bold mb-4 text-center" style="color: #003366;">Contáctanos</h1>
+                <p class="text-center text-muted mb-5">
+                    ¿Encontraste un bug? ¿Quieres sugerir una función? <br> ¿O necesitas reportar algo urgente?
+                </p>
+
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Tu Nombre (Opcional)</label>
+                        <input type="text" class="form-control form-control-lg" placeholder="Estudiante ITH">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Asunto</label>
+                        <select class="form-select form-select-lg">
+                            <option>Reportar un error en el sitio</option>
+                            <option>Sugerencia de mejora</option>
+                            <option>Reportar contenido inapropiado</option>
+                            <option>Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Mensaje</label>
+                        <textarea class="form-control" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-primary btn-lg"
+                            onclick="alert('Formulario de contacto simulado')">
+                            <i class="fas fa-paper-plane me-2"></i> Enviar Mensaje
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-5 text-center border-top pt-4">
+                    <p class="mb-2 fw-bold text-muted">También puedes escribirnos directo:</p>
+                    <a href="mailto:contacto@venadosrater.com" class="fs-5 text-decoration-none">
+                        contacto@venadosrater.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
