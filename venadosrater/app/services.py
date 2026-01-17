@@ -4,6 +4,10 @@ def get_all_professors():
     """
     Fetches all professors and calculates their ratings based on reviews.
     """
+    # Safe check for missing credentials
+    if not supabase:
+        return []
+
     # Fetch professors
     response = supabase.table('professors').select('*').execute()
     professors_data = response.data
@@ -43,6 +47,10 @@ def get_professor_by_id(id):
     """
     Fetches a single professor and their reviews.
     """
+    # Safe check for missing credentials
+    if not supabase:
+        return None
+
     # Fetch professor details
     p_response = supabase.table('professors').select('*').eq('id', id).execute()
     if not p_response.data:
