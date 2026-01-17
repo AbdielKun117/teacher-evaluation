@@ -4,7 +4,12 @@ from supabase import create_client, Client
 url: str = os.environ.get("SUPABASE_URL")
 key: str = os.environ.get("SUPABASE_KEY")
 
-if not url or not key:
-    raise ValueError("Supabase URL and Key must be set in environment variables.")
+supabase: Client = None
 
-supabase: Client = create_client(url, key)
+if not url or not key:
+    print("WARNING: Supabase URL and Key not found in environment variables. Database features will fail.")
+else:
+    try:
+        supabase = create_client(url, key)
+    except Exception as e:
+        print(f"ERROR: Failed to initialize Supabase client: {e}")
