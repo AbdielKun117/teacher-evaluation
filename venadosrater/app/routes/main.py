@@ -1,15 +1,13 @@
 from flask import Blueprint, render_template, request
-from app.data.mock_db import get_all_professors
+from app.services import get_all_professors, get_professor_by_id
 
 bp = Blueprint('main', __name__)
 
 @bp.route('/profesor/<id>')
 def professor(id):
-    from app.data.mock_db import get_professor_by_id
     professor = get_professor_by_id(id)
     if not professor:
-        return render_template('404.html'), 404 # Assuming a 404 page or just handling generic error
-        # simpler for now:
+        # Handling for now with a simple 404
         return "Profesor no encontrado", 404
     return render_template('professor.html', professor=professor)
 
@@ -23,15 +21,14 @@ def contact():
 
 @bp.route('/directorio')
 def directory():
-    from app.data.mock_db import get_all_professors
-    staff = get_all_professors() # We will use the same list as it now contains all roles
+    staff = get_all_professors() # Service fetches all, filter in template loop ideally or service
     return render_template('directory.html', staff=staff)
 
 @bp.route('/')
 def index():
     professors = get_all_professors()
     
-    # Basic search filter (mock)
+    # Basic search filter (Python side for now, can move to DB later)
     query = request.args.get('q')
     if query:
         professors = [p for p in professors if query.lower() in p['name'].lower()]
